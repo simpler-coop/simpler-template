@@ -1,13 +1,14 @@
 name: "Co-planning: Sync Fider to GitHub"
 
 on:
-  pull_request:
-    paths:
-      - ".github/linters/coplanning/**"
-      - ".github/workflows/coplanning-sync-fider-to-gh.yml"
   workflow_dispatch: # for manual runs
-  schedule:
-    - cron: "0 0 * * *" # run daily at midnight
+  # TODO: re-enable workflow triggers (pull_request and schedule) once ready
+  # pull_request:
+  #   paths:
+  #     - ".github/linters/coplanning/**"
+  #     - ".github/workflows/coplanning-sync-fider-to-gh.yml"
+  # schedule:
+    # - cron: "0 0 * * *" # run daily at midnight
 
 permissions:
   issues: write

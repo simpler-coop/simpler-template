@@ -1,7 +1,8 @@
 name: CI Documentation Linker Checks
 
 on:
-  schedule:
+  # TODO: re-enable workflow triggers (schedule) once ready
+  # schedule:
     # Run weekly on Monday at 9:00 AM EST
     #  - cron: "0 14 * * 1"
   workflow_dispatch:
