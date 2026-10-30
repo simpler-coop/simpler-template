@@ -1,3 +1,6 @@
+# Secrets used in local development
+.secrets
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
