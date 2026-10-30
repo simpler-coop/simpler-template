@@ -1,7 +1,7 @@
 import json
 
 from data import CliArgs
-from utils import get_env, get_query_from_file, log, make_request
+from utils import err_and_exit, get_env, get_query_from_file, log, make_request
 
 
 GITHUB_API_TOKEN = get_env("GITHUB_API_TOKEN")
@@ -30,12 +30,10 @@ def make_graphql_request(query: str, variables: dict) -> dict:
     )
     # Check for GraphQL errors
     if "errors" in response:
-        log(f"GraphQL errors: {response['errors']}")
-        return {}
+        err_and_exit(f"GraphQL errors: {response['errors']}")
     # Check if we have data
     if "data" not in response:
-        log("No data in GraphQL response")
-        return {}
+        err_and_exit("No data in GraphQL response")
     return response
 
 

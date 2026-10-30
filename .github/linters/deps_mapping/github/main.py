@@ -86,7 +86,7 @@ def write_diagram_to_file(
     diagram: Diagram,
     file_path: pathlib.Path,
 ) -> None:
-    """Write the diagram to the README file, updating the dependency graph section."""
+    """Write the dependency diagram to the configured Markdown file."""
     try:
         # Read the current README content
         with open(file_path, "r", encoding="utf-8") as f:
@@ -116,6 +116,6 @@ Here are the dependencies amongst deliverables:
         log(f"Successfully updated {file_path} with dependency diagram")
 
     except FileNotFoundError:
-        err_and_exit(f"README file not found: {file_path}")
+        err_and_exit(f"Dependency diagram file not found: {file_path}")
     except Exception as e:
         err_and_exit(f"Failed to update {file_path}: {e}")
