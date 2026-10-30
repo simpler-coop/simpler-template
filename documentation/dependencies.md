@@ -42,7 +42,7 @@ flowchart LR
         simpler-coop/simpler-template#1["Test Deliverable 1 🛠️"]:::InProgress
         simpler-coop/simpler-template#3["Test Deliverable 3"]
         simpler-coop/simpler-template#4["Bounty: wiki-style database editing ✔️"]:::Done
-        simpler-coop/simpler-template#10["Test Deliverable 2 🛠️"]:::InProgress
+        simpler-coop/simpler-template#10["Test Deliverable 2"]
     end
 
 
@@ -51,7 +51,6 @@ flowchart LR
     %% ─────────────────────────────
     simpler-coop/simpler-template#1 --> simpler-coop/simpler-template#10
     simpler-coop/simpler-template#1 --> simpler-coop/simpler-template#3
-    simpler-coop/simpler-template#3 --> simpler-coop/simpler-template#4
     simpler-coop/simpler-template#4 --> simpler-coop/simpler-template#10
     simpler-coop/simpler-template#10 --> simpler-coop/simpler-template#3
 
