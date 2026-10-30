@@ -4,7 +4,7 @@
 # It fetches all issues of a specified type from a GitHub project and checks if they
 # have checkboxes in their acceptance criteria sections.
 #
-# Usage: ./scripts/lint-deliverable-metrics.sh --org "HHS" --project "13" --issue-type "Deliverable" --dry-run
+# Usage: ./scripts/lint-deliverable-metrics.sh --org "simpler-coop" --project "13" --issue-type "Deliverable" --dry-run
 
 set -euo pipefail
 
@@ -15,7 +15,7 @@ set -euo pipefail
 HEADER_ACCEPTANCE_CRITERIA="### Acceptance criteria"
 HEADER_METRICS="### Metrics"
 HEADER_SUMMARY="### Summary"
-DEFAULT_ORG="HHS"
+DEFAULT_ORG="simpler-coop"
 DEFAULT_PROJECT="13"
 DEFAULT_ISSUE_TYPE="Deliverable"
 ALLOWED_ISSUE_TYPES=("Deliverable" "Proposal")

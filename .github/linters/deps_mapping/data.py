@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 issue_slug = str
@@ -14,7 +14,7 @@ class CliArgs:
     project: int
     issue_type: str | None = None
     labels: list[str] | None = None
-    statuses: list[str] = field(default_factory=list)
+    statuses: list[str] | None = None
     batch: int = 100
     dry_run: bool = False
 

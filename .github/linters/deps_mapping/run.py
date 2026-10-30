@@ -10,11 +10,6 @@ Usage: From the root of the deps_mapping/ directory:
     --org "simpler-coop" \
     --repo "simpler-template" \
     --project 1 \
-    --statuses "Todo" \
-    --statuses "Prioritized" \
-    --statuses "Planning" \
-    --statuses "In Progress" \
-    --statuses "Done" \
     --scope "repo" \
     --dry-run
 
@@ -62,7 +57,8 @@ def parse_args() -> CliArgs:
     parser.add_argument(
         "--statuses",
         action="append",
-        help="GitHub issue status, can be specified multiple times",
+        help="Optional GitHub issue status filter, can be specified multiple times; "
+        "omit to include all statuses",
     )
     parser.add_argument("--batch", type=int, default=100, help="Batch size")
     parser.add_argument("--dry-run", action="store_true", help="Dry run mode")

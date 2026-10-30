@@ -82,7 +82,7 @@ def parse_repo_response(response_data: list[dict], args: CliArgs) -> Diagram:
         )
 
         # Filter issues
-        if status not in args.statuses:
+        if args.statuses and status not in args.statuses:
             continue
 
         # Parse issue and dependencies
@@ -119,7 +119,7 @@ def parse_project_response(response_data: list[dict], args: CliArgs) -> Diagram:
             args.issue_type is not None and issue_type != args.issue_type
         ):
             continue
-        if status not in args.statuses:
+        if args.statuses and status not in args.statuses:
             continue
 
         # Parse issue and dependencies

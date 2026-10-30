@@ -52,11 +52,6 @@ jobs:
             --org "${{ github.repository_owner }}" \
             --repo "${{ github.event.repository.name }}" \
             --project 1 \
-            --statuses "Todo" \
-            --statuses "Prioritized" \
-            --statuses "Planning" \
-            --statuses "In Progress" \
-            --statuses "Done" \
             --scope "repo"
 
       - name: Commit changes to PR

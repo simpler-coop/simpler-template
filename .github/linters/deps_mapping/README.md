@@ -13,12 +13,6 @@ python run.py \
     --org simpler-coop \
     --repo simpler-template \
     --project 1 \
-    --issue-type "Todo" \
-    --issue-type "Deliverable" \
-    --statuses "Prioritized" \
-    --statuses "Planning" \
-    --statuses "In Progress" \
-    --statuses "Done" \
     --scope repo
 ```
 
@@ -28,14 +22,9 @@ This will generate a diagram of the dependencies upstream and downstream of a sp
 
 ```bash
 python run.py \
-    --org HHS \
+    --org simpler-coop \
     --repo simpler-template \
-    --project 12 \
-    --issue-type "Deliverable" \
-    --statuses "Prioritized" \
-    --statuses "Planning" \
-    --statuses "In Progress" \
-    --statuses "Done" \
+    --project 1 \
     --scope issue
 ```
 
@@ -47,7 +36,7 @@ The CLI supports the following options:
 - `--repo`: The GitHub repository to fetch issues from
 - `--project`: The GitHub project to use for issue status
 - `--issue-type`: Optional GitHub issue type to include in the dependency mapping. When omitted, issues of all types are included.
-- `--statuses`: The GitHub issue status to include in the dependency mapping, can be specified multiple times
+- `--statuses`: Optional GitHub issue statuses to include in the dependency mapping, can be specified multiple times. If omitted, issues with all statuses are included.
 - `--batch`: The number of issues to fetch at a time, defaults to `100` which is the max batch size for the GitHub API
 - `--scope`: The scope of the dependencies to map (`issue` or `repo`)
 - `--dry-run`: Whether to run the mapping in dry run mode (e.g. log the GitHub updates but don't actually perform them)
@@ -60,14 +49,9 @@ Before running the script locally, you need to set the `GITHUB_API_TOKEN` enviro
 
 ```bash
 python run.py \
-    --org "HHS" \
+    --org "simpler-coop" \
     --repo "simpler-template" \
-    --project 12 \
-    --issue-type "Deliverable" \
-    --statuses "Prioritized" \
-    --statuses "Planning" \
-    --statuses "In Progress" \
-    --statuses "Done" \
+    --project 1 \
     --scope issue
 ```
 
