@@ -20,6 +20,7 @@ STATUS_CLASSES = {
 }
 STATUS_ICONS = {
     "In Progress": " 🛠️",
+    "In progress": " 🛠️",
     "In Review": " 🛠️",
     "Done": " ✔️",
 }
