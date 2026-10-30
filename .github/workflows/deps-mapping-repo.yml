@@ -65,12 +65,17 @@ jobs:
         # from running on the main branch after the PR is merged
         if: github.event_name == 'pull_request'
         run: |
+          if [[ "${LOCAL_ACTIONS:-false}" == "true" ]]; then
+            echo "Local act run: skipping commit and push"
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet; then
+          git add ../../../documentation/dependencies.md
+          if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -am "docs: Update dependencies.md with dependency diagram"
+            git commit -m "docs: Update dependencies.md with dependency diagram"
             git push
           fi
 
@@ -78,6 +83,10 @@ jobs:
         # Commit changes to main with skip CI when triggered manually or on a schedule
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
+          if [[ "${LOCAL_ACTIONS:-false}" == "true" ]]; then
+            echo "Local act run: skipping commit and push"
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add ../../../documentation/dependencies.md

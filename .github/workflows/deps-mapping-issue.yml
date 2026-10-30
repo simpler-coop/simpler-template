@@ -53,6 +53,11 @@ jobs:
       - name: Run script (real run)
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         run: |
+          dry_run_args=()
+          if [[ "${LOCAL_ACTIONS:-false}" == "true" ]]; then
+            dry_run_args+=(--dry-run)
+          fi
+
           python run.py \
             --org "${{ github.repository_owner }}" \
             --repo "${{ github.event.repository.name }}" \
@@ -62,4 +67,5 @@ jobs:
             --statuses "Planning" \
             --statuses "In Progress" \
             --statuses "Done" \
-            --scope "issue"
+            --scope "issue" \
+            "${dry_run_args[@]}"

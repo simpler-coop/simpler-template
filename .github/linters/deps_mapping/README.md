@@ -70,3 +70,27 @@ python run.py \
 ```
 
 You can also run the script with the `--dry-run` flag to see what would be done without actually performing the actions.
+
+## Running the GitHub Actions locally
+
+The workflows can be run locally with [`act`](https://nektosact.com/), which uses Docker to execute the workflow steps. Docker, `act`, and the repository's ignored `.secrets` file are configured for local runs. Add these entries to `.secrets` without committing the file:
+
+```text
+GITHUB_TOKEN=<personal-access-token>
+```
+
+The token must be able to read the repository issues and the organization project fields queried by the script. The issue-level workflow is forced into `--dry-run` mode during local runs; it reads GitHub data but does not update issues. The repo-level workflow writes the diagram to `documentation/dependencies.md` in your local checkout and skips its commit and push steps.
+
+In VS Code, run **Tasks: Run Task** and choose one of:
+
+- `Actions: deps mapping issue (local dry run)`
+- `Actions: deps mapping repo (local output)`
+
+Alternatively, run from the repository root:
+
+```bash
+act workflow_dispatch --workflows .github/workflows/deps-mapping-issue.yml --env LOCAL_ACTIONS=true
+act workflow_dispatch --workflows .github/workflows/deps-mapping-repo.yml --env LOCAL_ACTIONS=true
+```
+
+The checked-in `.actrc` loads `.secrets` automatically and selects the `linux/amd64` runner image on Apple Silicon. The issue workflow only prints the proposed issue-body updates locally. The repo workflow changes the local Markdown file; inspect it with `git diff -- documentation/dependencies.md`. Neither local task pushes changes to GitHub or starts a GitHub Actions run.
