@@ -50,14 +50,15 @@ jobs:
             --scope "issue" \
             --dry-run
 
+      ## TODO: update project ID to be a variable
       - name: Run script (real run)
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         run: |
           python run.py \
             --org "${{ github.repository_owner }}" \
             --repo "${{ github.event.repository.name }}" \
-            ## TODO: update project ID to be a variable
             --project 1 \
+            --statuses "Todo" \
             --statuses "Prioritized" \
             --statuses "Planning" \
             --statuses "In Progress" \
