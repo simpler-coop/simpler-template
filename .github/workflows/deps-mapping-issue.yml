@@ -33,13 +33,13 @@ jobs:
         with:
           python-version: "3.14"
 
+      ## TODO: update project ID to be a variable
       - name: Run script (dry run)
         if: github.event_name == 'pull_request'
         run: |
           python run.py \
             --org "${{ github.repository_owner }}" \
             --repo "${{ github.event.repository.name }}" \
-            ## TODO: update project ID to be a variable
             --project 1 \
             --statuses "Todo" \
             --statuses "Prioritized" \
