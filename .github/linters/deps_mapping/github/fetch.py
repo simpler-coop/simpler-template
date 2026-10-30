@@ -104,7 +104,12 @@ def fetch_issues_from_repo(args: CliArgs) -> list:
     if args.labels:
         log(f"Fetching issues with labels: {args.labels}")
         payload["labels"] = args.labels
-    return make_paginated_graphql_request(query, payload, args.batch)
+    issues = make_paginated_graphql_request(query, payload, args.batch)
+    log(
+        f"Fetched {len(issues)} issues from {args.org}/{args.repo} "
+        f"for {args.scope} mapping"
+    )
+    return issues
 
 
 def fetch_issues_from_project(args: CliArgs) -> list:

@@ -38,7 +38,8 @@ jobs:
         if: env.LOCAL_ACTIONS != 'true'
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # TODO: confirm this is the right token? 
+          token: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
           ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
       - name: Set up Python
