@@ -39,7 +39,7 @@ flowchart LR
 
     subgraph other["Other"]
     direction LR
-        simpler-coop/simpler-template#1["Test Deliverable 1"]:::InProgress
+        simpler-coop/simpler-template#1["Test Deliverable 1 🛠️"]:::InProgress
         simpler-coop/simpler-template#3["Test Deliverable 2"]
         simpler-coop/simpler-template#4["Bounty: wiki-style database editing ✔️"]:::Done
         simpler-coop/simpler-template#10["Test Deliverable 3"]
