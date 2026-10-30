@@ -46,7 +46,6 @@ jobs:
             --statuses "Planning" \
             --statuses "In Progress" \
             --statuses "Done" \
-            --issue-type "Deliverable" \
             --scope "issue" \
             --dry-run
 
@@ -63,5 +62,4 @@ jobs:
             --statuses "Planning" \
             --statuses "In Progress" \
             --statuses "Done" \
-            --issue-type "Deliverable" \
             --scope "issue"

@@ -2,13 +2,14 @@
 Map dependencies amongst GitHub issues using a mermaid diagram.
 
 # TODO: update project ID to be a variable 
+# TODO: Consider bringing back the following option:
+#    --issue-type "Deliverable" \
 
 Usage: From the root of the deps_mapping/ directory:
   python run.py \
     --org "simpler-coop" \
     --repo "simpler-template" \
     --project 1 \
-    --issue-type "Deliverable" \
     --statuses "Todo" \
     --statuses "Prioritized" \
     --statuses "Planning" \
@@ -16,6 +17,7 @@ Usage: From the root of the deps_mapping/ directory:
     --statuses "Done" \
     --scope "repo" \
     --dry-run
+
 """
 
 import argparse
