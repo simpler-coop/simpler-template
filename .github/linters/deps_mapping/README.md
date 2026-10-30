@@ -41,7 +41,7 @@ The CLI supports the following options:
 - `--scope`: The scope of the dependencies to map (`issue` or `repo`)
 - `--dry-run`: Whether to run the mapping in dry run mode (e.g. log the GitHub updates but don't actually perform them)
 
-For repository mappings, a matching project status takes precedence. If an issue has no status in the selected project, closed GitHub issues are shown as `Done` and open issues default to `Todo`.
+For repository mappings, a matching project status takes precedence. If an issue has no status in the selected project, closed GitHub issues are shown as `Done` and open issues default to `Todo`. If no repository issues are returned as items in the selected project, the mapping exits without writing a diagram; verify the project number and that the API token can read the project.
 
 ## Local development
 
@@ -80,4 +80,4 @@ act workflow_dispatch --workflows .github/workflows/deps-mapping-issue.yml --env
 act workflow_dispatch --workflows .github/workflows/deps-mapping-repo.yml --env LOCAL_ACTIONS=true
 ```
 
-The checked-in `.actrc` loads `.secrets` automatically and selects the `linux/amd64` runner image on Apple Silicon. The issue workflow only prints the proposed issue-body updates locally. The repo workflow changes the local Markdown file; inspect it with `git diff -- documentation/dependencies.md`. Neither local task pushes changes to GitHub or starts a GitHub Actions run.
+The checked-in `.actrc` loads `.secrets` automatically, selects the `linux/amd64` runner image on Apple Silicon, and bind-mounts the workspace into the container. The VS Code tasks set the repository owner and name explicitly because `act` cannot parse SSH remotes that use a custom host alias. The issue workflow only prints the proposed issue-body updates locally. The repo workflow changes the local Markdown file; inspect it with `git diff -- documentation/dependencies.md`. Neither local task pushes changes to GitHub or starts a GitHub Actions run.

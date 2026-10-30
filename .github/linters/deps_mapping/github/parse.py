@@ -3,6 +3,7 @@ from enum import StrEnum
 
 from data import CliArgs, Dependency, Issue
 from diagram import Diagram
+from utils import err_and_exit, log
 
 # #######################################################
 # Constants
@@ -55,6 +56,22 @@ class Fields(StrEnum):
 
 def parse_repo_response(response_data: list[dict], args: CliArgs) -> Diagram:
     """Parse GraphQL response data into a Diagram."""
+    project_items = (
+        item
+        for issue_data in response_data
+        for item in issue_data.get(Fields.PROJECT_ITEMS, {}).get(Fields.NODES, [])
+        if isinstance(item, dict)
+    )
+    if not any(
+        (item.get(Fields.PROJECT) or {}).get(Fields.NUMBER) == args.project
+        for item in project_items
+    ) and response_data:
+        err_and_exit(
+            f"No issues were returned as items in project #{args.project}. "
+            "Check the project number and confirm the API token has permission "
+            "to read the project."
+        )
+
     issues: dict[str, Issue] = {}
     subgraphs: dict[str, list[Issue]] = {}
     dependencies = []
@@ -69,10 +86,23 @@ def parse_repo_response(response_data: list[dict], args: CliArgs) -> Diagram:
             default="",
         )
         if not status:
+            project_numbers = [
+                item.get(Fields.PROJECT, {}).get(Fields.NUMBER)
+                for item in issue_data.get(Fields.PROJECT_ITEMS, {}).get(
+                    Fields.NODES, []
+                )
+                if item is not None
+            ]
             status = (
                 Defaults.COMPLETED_STATUS
                 if issue_data.get(Fields.STATE) == "CLOSED"
                 else Defaults.STATUS
+            )
+            log(
+                f"No project status found for "
+                f"{issue_data[Fields.REPO][Fields.REPO_NAME]}#{issue_data[Fields.NUMBER]} "
+                f"in project #{args.project}; returned project numbers: "
+                f"{project_numbers or 'none'}; using {status}"
             )
         group = extract_field_value(
             issue_data,

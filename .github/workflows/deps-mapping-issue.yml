@@ -23,9 +23,13 @@ jobs:
 
     env:
       GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Local runs can override these defaults with DEPS_MAPPING_ORG and DEPS_MAPPING_REPO.
+      DEPS_MAPPING_DEFAULT_ORG: ${{ github.repository_owner }}
+      DEPS_MAPPING_DEFAULT_REPO: ${{ github.event.repository.name }}
 
     steps:
       - name: Checkout code
+        if: env.LOCAL_ACTIONS != 'true'
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -37,9 +41,11 @@ jobs:
       - name: Run script (dry run)
         if: github.event_name == 'pull_request'
         run: |
+          org="${DEPS_MAPPING_ORG:-$DEPS_MAPPING_DEFAULT_ORG}"
+          repo="${DEPS_MAPPING_REPO:-$DEPS_MAPPING_DEFAULT_REPO}"
           python run.py \
-            --org "${{ github.repository_owner }}" \
-            --repo "${{ github.event.repository.name }}" \
+            --org "$org" \
+            --repo "$repo" \
             --project 1 \
             --scope "issue" \
             --dry-run
@@ -48,14 +54,16 @@ jobs:
       - name: Run script (real run)
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         run: |
+          org="${DEPS_MAPPING_ORG:-$DEPS_MAPPING_DEFAULT_ORG}"
+          repo="${DEPS_MAPPING_REPO:-$DEPS_MAPPING_DEFAULT_REPO}"
           dry_run_args=()
           if [[ "${LOCAL_ACTIONS:-false}" == "true" ]]; then
             dry_run_args+=(--dry-run)
           fi
 
           python run.py \
-            --org "${{ github.repository_owner }}" \
-            --repo "${{ github.event.repository.name }}" \
+            --org "$org" \
+            --repo "$repo" \
             --project 1 \
             --scope "issue" \
             "${dry_run_args[@]}"
