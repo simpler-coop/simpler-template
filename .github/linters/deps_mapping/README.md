@@ -6,13 +6,14 @@ This script generates a mermaid diagram of the dependencies between issues in a 
 
 ### Mapping dependencies for all deliverables
 
-This will generate a diagram of the dependencies between all deliverables in the repository with a specific issue type, then update the [`documentation/dependencies.md`](../../../documentation/dependencies.md) file with the diagram.
+This will generate a diagram of the dependencies between all deliverables in the repository (optionally with a specific issue type), then update the [`documentation/dependencies.md`](../../../documentation/dependencies.md) file with the diagram.
 
 ```bash
 python run.py \
-    --org HHS \
+    --org simpler-coop \
     --repo simpler-template \
-    --project 12 \
+    --project 1 \
+    --issue-type "Todo" \
     --issue-type "Deliverable" \
     --statuses "Prioritized" \
     --statuses "Planning" \
