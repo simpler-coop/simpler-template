@@ -14,6 +14,7 @@ query (
     ) {
       nodes {
         body
+        state
         ...IssueDetails
         ...ProjectItems
         ...BlockedItems
@@ -37,7 +38,7 @@ fragment IssueDetails on Issue {
 
 # Project items
 fragment ProjectItems on Issue {
-  projectItems(first: 10) {
+  projectItems(first: 100) {
     nodes {
       project {
         number

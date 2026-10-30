@@ -16,6 +16,7 @@ class Defaults(StrEnum):
     """
 
     STATUS = "Todo"
+    COMPLETED_STATUS = "Done"
     GROUP = "Other"
 
 
@@ -38,6 +39,7 @@ class Fields(StrEnum):
     CONTENT = "content"
     STATUS = "status"
     PILLAR = "pillar"
+    STATE = "state"
     # Repo fields
     REPO = "repository"
     REPO_NAME = "nameWithOwner"
@@ -64,8 +66,14 @@ def parse_repo_response(response_data: list[dict], args: CliArgs) -> Diagram:
             issue_data,
             args.project,
             Fields.STATUS,
-            default=Defaults.STATUS,
+            default="",
         )
+        if not status:
+            status = (
+                Defaults.COMPLETED_STATUS
+                if issue_data.get(Fields.STATE) == "CLOSED"
+                else Defaults.STATUS
+            )
         group = extract_field_value(
             issue_data,
             args.project,

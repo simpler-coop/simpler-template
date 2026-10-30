@@ -52,6 +52,8 @@ The CLI supports the following options:
 - `--scope`: The scope of the dependencies to map (`issue` or `repo`)
 - `--dry-run`: Whether to run the mapping in dry run mode (e.g. log the GitHub updates but don't actually perform them)
 
+For repository mappings, a matching project status takes precedence. If an issue has no status in the selected project, closed GitHub issues are shown as `Done` and open issues default to `Todo`.
+
 ## Local development
 
 Before running the script locally, you need to set the `GITHUB_API_TOKEN` environment variable.
@@ -77,9 +79,10 @@ The workflows can be run locally with [`act`](https://nektosact.com/), which use
 
 ```text
 GITHUB_TOKEN=<personal-access-token>
+GH_TOKEN_PROJECT_ACCESS=<personal-access-token>
 ```
 
-The token must be able to read the repository issues and the organization project fields queried by the script. The issue-level workflow is forced into `--dry-run` mode during local runs; it reads GitHub data but does not update issues. The repo-level workflow writes the diagram to `documentation/dependencies.md` in your local checkout and skips its commit and push steps.
+Both values can use the same token. It needs access to read the repository issues and the organization project fields queried by the script (`read:project` for a classic PAT, or the corresponding Projects read permission for a fine-grained PAT). The issue-level workflow is forced into `--dry-run` mode during local runs; it reads GitHub data but does not update issues. The repo-level workflow writes the diagram to `documentation/dependencies.md` in your local checkout and skips its commit and push steps.
 
 In VS Code, run **Tasks: Run Task** and choose one of:
 
