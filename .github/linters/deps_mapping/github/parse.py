@@ -107,7 +107,9 @@ def parse_project_response(response_data: list[dict], args: CliArgs) -> Diagram:
         issue_type = (content.get(Fields.ISSUE_TYPE) or {}).get(Fields.NAME)
 
         # Filter issues
-        if not content or issue_type != args.issue_type:
+        if not content or (
+            args.issue_type is not None and issue_type != args.issue_type
+        ):
             continue
         if status not in args.statuses:
             continue

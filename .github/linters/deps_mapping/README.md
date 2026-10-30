@@ -45,7 +45,7 @@ The CLI supports the following options:
 - `--org`: The GitHub organization that owns the repository
 - `--repo`: The GitHub repository to fetch issues from
 - `--project`: The GitHub project to use for issue status
-- `--issue-type`: The GitHub issue type to include in the dependency mapping
+- `--issue-type`: Optional GitHub issue type to include in the dependency mapping. When omitted, issues of all types are included.
 - `--statuses`: The GitHub issue status to include in the dependency mapping, can be specified multiple times
 - `--batch`: The number of issues to fetch at a time, defaults to `100` which is the max batch size for the GitHub API
 - `--scope`: The scope of the dependencies to map (`issue` or `repo`)

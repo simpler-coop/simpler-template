@@ -12,7 +12,7 @@ class CliArgs:
     org: str
     repo: str
     project: int
-    issue_type: str
+    issue_type: str | None = None
     labels: list[str] | None = None
     statuses: list[str] = field(default_factory=list)
     batch: int = 100

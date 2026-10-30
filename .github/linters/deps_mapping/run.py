@@ -50,7 +50,10 @@ def parse_args() -> CliArgs:
         required=True,
         help="GitHub project number",
     )
-    parser.add_argument("--issue-type", required=True, help="GitHub issue type")
+    parser.add_argument(
+        "--issue-type",
+        help="Optional GitHub issue type to include in the dependency mapping",
+    )
     parser.add_argument(
         "--labels",
         action="append",
