@@ -39,7 +39,8 @@ jobs:
           python run.py \
             --org "${{ github.repository_owner }}" \
             --repo "${{ github.event.repository.name }}" \
-            --project 12 \
+            ## TODO: update project ID to be a variable
+            --project 1 \
             --statuses "Prioritized" \
             --statuses "Planning" \
             --statuses "In Progress" \
