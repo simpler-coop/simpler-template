@@ -41,7 +41,7 @@ flowchart LR
     direction LR
         simpler-coop/simpler-template#1["Test Deliverable 1"]
         simpler-coop/simpler-template#3["Test Deliverable 2"]
-        simpler-coop/simpler-template#4["Bounty: wiki-style database editing"]
+        simpler-coop/simpler-template#4["Bounty: wiki-style database editing ✔️"]:::Done
     end
 
 
