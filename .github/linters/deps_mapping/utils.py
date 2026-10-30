@@ -129,7 +129,31 @@ def make_request(
         with urllib.request.urlopen(req) as response:
             return json.loads(response.read().decode())
     except urllib.request.HTTPError as e:
-        err_and_exit(f"HTTP request failed: {e.code} - {e.reason}")
+        details = f"HTTP request failed: {e.code} - {e.reason} ({method} {url})"
+        try:
+            error_response = json.loads(e.read().decode())
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            error_response = {}
+
+        if isinstance(error_response, dict):
+            message = error_response.get("message")
+            errors = error_response.get("errors")
+            documentation_url = error_response.get("documentation_url")
+            if message:
+                details += f"\nGitHub message: {message}"
+            if errors:
+                details += f"\nGitHub errors: {errors}"
+            if documentation_url:
+                details += f"\nDocumentation: {documentation_url}"
+
+        api_token = (
+            headers.get("Authorization", "")
+            .removeprefix("token ")
+            .removeprefix("Bearer ")
+        )
+        if api_token:
+            details = details.replace(api_token, "[REDACTED]")
+        err_and_exit(details)
     except json.JSONDecodeError:
         err_and_exit("Failed to parse JSON response")
     except Exception as e:

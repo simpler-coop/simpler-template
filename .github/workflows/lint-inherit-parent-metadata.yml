@@ -1,6 +1,7 @@
 name: Lint - Inherit parent metadata
 
 on:
+  workflow_dispatch: # for manual runs
   # TODO: re-enable workflow triggers (issues) once ready
   # issues:
     # types: [opened]

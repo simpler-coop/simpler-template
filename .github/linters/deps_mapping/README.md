@@ -62,11 +62,10 @@ You can also run the script with the `--dry-run` flag to see what would be done 
 The workflows can be run locally with [`act`](https://nektosact.com/), which uses Docker to execute the workflow steps. Docker, `act`, and the repository's ignored `.secrets` file are configured for local runs. Add these entries to `.secrets` without committing the file:
 
 ```text
-GITHUB_TOKEN=<personal-access-token>
 GH_TOKEN_PROJECT_ACCESS=<personal-access-token>
 ```
 
-Both values can use the same token. It needs access to read the repository issues and the organization project fields queried by the script (`read:project` for a classic PAT, or the corresponding Projects read permission for a fine-grained PAT). The issue-level workflow is forced into `--dry-run` mode during local runs; it reads GitHub data but does not update issues. The repo-level workflow writes the diagram to `documentation/dependencies.md` in your local checkout and skips its commit and push steps.
+Both workflows use this token. For a classic PAT, grant `repo` and `read:project` scopes so it can read issue bodies and project fields and update issue bodies. The issue-level workflow is forced into `--dry-run` mode during local runs; it reads GitHub data but does not update issues. The repo-level workflow writes the diagram to `documentation/dependencies.md` in your local checkout and skips its commit and push steps.
 
 In VS Code, run **Tasks: Run Task** and choose one of:
 

@@ -56,20 +56,26 @@ class Fields(StrEnum):
 
 def parse_repo_response(response_data: list[dict], args: CliArgs) -> Diagram:
     """Parse GraphQL response data into a Diagram."""
-    project_items = (
-        item
+    project_numbers = {
+        project_number
         for issue_data in response_data
         for item in issue_data.get(Fields.PROJECT_ITEMS, {}).get(Fields.NODES, [])
         if isinstance(item, dict)
-    )
-    if not any(
-        (item.get(Fields.PROJECT) or {}).get(Fields.NUMBER) == args.project
-        for item in project_items
-    ) and response_data:
+        if (
+            project_number := (item.get(Fields.PROJECT) or {}).get(Fields.NUMBER)
+        ) is not None
+    }
+    if (
+        args.scope == "repo"
+        and response_data
+        and args.project not in project_numbers
+    ):
         err_and_exit(
-            f"No issues were returned as items in project #{args.project}. "
-            "Check the project number and confirm the API token has permission "
-            "to read the project."
+            f"Repository mapping for {args.org}/{args.repo} fetched "
+            f"{len(response_data)} issues, but none belong to project "
+            f"#{args.project}; project numbers returned: "
+            f"{sorted(project_numbers) or 'none'}. Check the project number, "
+            "project membership, and whether the API token can read the project."
         )
 
     issues: dict[str, Issue] = {}

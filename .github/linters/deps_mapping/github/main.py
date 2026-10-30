@@ -21,6 +21,9 @@ def map_issue_dependencies(args: CliArgs) -> None:
     """Parse dependencies for a single issue."""
     # Make the GraphQL request
     diagram = fetch_and_parse_issues_from_repo(args)
+    log(f"Preparing dependency updates for {len(diagram.issues)} issues")
+    if not diagram.issues:
+        log("No issues matched the mapping filters; no issue bodies were updated")
 
     # Update each issue with the dependency diagram
     for issue, issue_data in diagram.issues.items():
