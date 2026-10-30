@@ -14,6 +14,7 @@ BLOCKED_BY = "blocked_by"
 SUBGRAPH_STYLE = "fill:#F7F7F4,stroke:#171716"
 STATUS_CLASSES = {
     "In Progress": ":::InProgress",
+    "In progress": ":::InProgress",
     "In Review": ":::InProgress",
     "Done": ":::Done",
 }
