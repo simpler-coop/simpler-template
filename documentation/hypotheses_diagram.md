@@ -10,7 +10,7 @@ flowchart LR
   classDef LowCertainty fill:#FF6961,stroke:#204e34,stroke-width:3px,color:#000
   style Canvas fill:transparent,stroke:#171716
   style Legend fill:#F7F7F4,stroke:#171716
-  style other fill:#F7F7F4,stroke:#171716
+  %% style other fill:#F7F7F4,stroke:#171716
 
   %% ─────────────────────────────
   %% Legend
@@ -28,10 +28,7 @@ flowchart LR
   %% ─────────────────────────────
   %% Main canvas
   %% ─────────────────────────────
-  subgraph Canvas["Dependencies"]
-    direction LR
-
-    subgraph other["Other"]
+  subgraph Canvas["Hypotheses"]
     direction LR
         users["Users will engage"]
         userPriorities["User priorities lead to better outcomes"]
@@ -44,8 +41,6 @@ flowchart LR
         politics["Adoption improves organizing campaigns"]:::HighCertainty
         userJoy["Adoption improves user and labor experience"]:::HighCertainty
         material["Quality of life on Earth improves"]:::HighCertainty
-    end
-
 
     %% ─────────────────────────────
     %% Relationships
