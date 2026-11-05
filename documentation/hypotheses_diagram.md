@@ -5,7 +5,7 @@ flowchart LR
   %% ─────────────────────────────
   %% Styles
   %% ─────────────────────────────
-  classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:5,ry:5
+  classDef default fill:#D3D3D3,stroke:#333,stroke-width:1px,color:#000,rx:5,ry:5
   classDef HighCertainty fill:#80EF80,stroke:#07648d,stroke-width:2px,color:#000
   classDef LowCertainty fill:#FF6961,stroke:#204e34,stroke-width:3px,color:#000
   style Canvas fill:transparent,stroke:#171716
